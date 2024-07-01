@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Envío</title>
+    <script>
+        function validarRun(input) {
+            var run = input.value.replace(/\./g, '').replace('-', '');
+            if (!/^\d{0,12}$/.test(run)) {
+                alert('El RUN ingresado no es válido. Por favor, ingrese solo números y máximo 12 caracteres.');
+                input.value = '';
+            }
+        }
+    </script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: orange;
+    padding: 10px 0;
+}
+.menu {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.menu li:hover > a {
+    background-color: rgb(220, 169, 111);
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'iniciolog' %}">Tienda</a></li>
+                <a href="{% url 'principal' %}">admin</a>
+            </ul>
+        </nav>
+    </header>
+
+<div class="container">
+    <h1>Registro de Envío</h1>
+    <form action="{% url 'pago' %}" method="post">
+        {% csrf_token %}
+
+        <label for="nombre_cliente">Nombre del Cliente:</label>
+        <input type="text" id="nombre_cliente" pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+"  name="nombre_cliente" required>
+
+        <label for="direccion">Dirección de Envío:</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="region">Región:</label>
+        <select id="region" name="region" required>
+            <option value="">Seleccionar</option>
+            <option value="Bio Bio">Bio Bio</option>
+            <option value="Valparaiso">Valparaiso</option>
+            <option value="Magallanes">Magallanes</option>
+            <option value="Aysen">Aysén</option>
+            <option value="Antofagasta">Antofagasta</option>
+            <option value="Araucania">Araucanía</option>
+            <option value="Atacama">Atacama</option>
+            <option value="Coquimbo">Coquimbo</option>
+            <option value="Los Lagos">Los Lagos</option>
+            <option value="Los Rios">Los Ríos</option>
+            <option value="Maule">Maule</option>
+            <option value="Metropolitana">Metropolitana</option>
+            <option value="Tarapaca">Tarapacá</option>
+        </select>
+        
+        <label for="comuna">Comuna:</label>
+        <input type="text" id="comuna" name="comuna" required>
+
+        <label for="run">RUT receptor (sin signos):</label>
+        <input type="text" id="run" name="run" required minlength="9" maxlength="9" oninput="validarRun(this)">
+
+        <input type="submit" value="Enviar Pedido">
+        
+    </form>
+</div>
+
+</body>
+</html>

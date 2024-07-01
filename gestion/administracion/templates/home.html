@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Bootstrap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        .carousel-item {
+            height: 60vh;
+            min-height: 300px;
+            background: no-repeat center center scroll;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Mi Página</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Características</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Precios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-regular fa-cart-shopping"></i> Carrito</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/1600x900/?nature,water');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Primera diapositiva</h5>
+                    <p>Descripción de la primera diapositiva.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/1600x900/?nature,forest');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Segunda diapositiva</h5>
+                    <p>Descripción de la segunda diapositiva.</p>
+                </div>
+            </div>
+            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/1600x900/?nature,mountain');">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Tercera diapositiva</h5>
+                    <p>Descripción de la tercera diapositiva.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Products Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-4">
+                    <div class="card border-0 bg-light mb-4">
+                        <a href="{% url 'product_detail' product_id=1 %}" class="stretched-link"></a>
+                        <div class="card-body">
+                            <i class="fas fa-cog fa-3x mb-3"></i>
+                            <h5 class="card-title">Camiseta Local</h5>
+                            <p class="card-text">Descripción breve del producto 1.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-0 bg-light mb-4">
+                        <a href="{% url 'product_detail' product_id=2 %}" class="stretched-link"></a>
+                        <div class="card-body">
+                            <i class="fas fa-heart fa-3x mb-3"></i>
+                            <h5 class="card-title">Camiseta Visita</h5>
+                            <p class="card-text">Descripción breve del producto 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-0 bg-light mb-4">
+                        <a href="{% url 'product_detail' product_id=3 %}" class="stretched-link"></a>
+                        <div class="card-body">
+                            <i class="fas fa-rocket fa-3x mb-3"></i>
+                            <h5 class="card-title">Camiseta Portero</h5>
+                            <p class="card-text">Descripción breve del producto 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">© 2024 Mi Página. Todos los derechos reservados.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <a href="#" class="text-white">Política de privacidad</a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="text-white">Términos de servicio</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

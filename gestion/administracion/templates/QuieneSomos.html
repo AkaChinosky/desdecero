@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black;
+}
+
+header {
+    background-color: orange;
+    padding: 10px 0;
+}
+
+.menu {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.menu li:hover > a {
+    background-color: black;
+}
+
+
+
+
+
+.content {
+    padding: 40px;
+    font-family:'Oswald', sans-serif;
+}
+
+footer {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'iniciolog' %}">Tienda</a></li>
+                <a href="{% url 'principal' %}">admin</a>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="content">
+        <h1 style="text-align: center;">QUIÉNES SOMOS </h1>
+        <p>En Camisetas Albas, somos apasionados por el fútbol y especialmente por el Colo-Colo FC. Desde que abrimos nuestras puertas en 2024, nos hemos dedicado a ofrecer a nuestros clientes la mejor selección de camisetas y productos relacionados con este gran club.
+
+            Nuestro equipo está compuesto por fanáticos del fútbol que entienden la importancia de representar los colores y el espíritu de Colo-Colo. Nos esforzamos por brindar una experiencia de compra excepcional, ofreciendo productos de alta calidad y un servicio al cliente excepcional.
+            
+            En Camisetas Albas, creemos en la pasión, la dedicación y el orgullo de ser parte de la familia Colo-Colo. Nos comprometemos a ofrecer a nuestros clientes no solo camisetas, sino una forma de expresar su amor por el club más grande de Chile.
+            
+            Nuestra misión es ser el destino número uno para los aficionados de Colo-Colo, proporcionando una amplia variedad de productos auténticos y exclusivos que les permitan mostrar su apoyo en cualquier lugar y en cualquier momento.
+            
+            Gracias por formar parte de la comunidad de Camisetas Albas. Estamos emocionados de poder servirte y ayudarte a lucir los colores con orgullo.
+            
+            </p>
+    </section>
+    <footer>
+        <p> &copy; 2024</p>
+    </footer>
+</body>
+</html>

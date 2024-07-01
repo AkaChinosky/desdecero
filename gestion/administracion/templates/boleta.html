@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boleta de Pago</title>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: orange;
+    padding: 10px 0;
+}
+.menu {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.menu li:hover > a {
+    background-color: rgb(220, 169, 111);
+}
+.contenedor {
+    width: 80%;
+    margin: 50px auto;
+    font-weight: bold;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; 
+}
+
+h1 {
+    text-align: center;
+}
+
+.boleta-info {
+    margin-bottom: 20px;
+}
+
+.boleta-info p {
+    margin: 5px 0;
+}
+
+.mensaje {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.verificado-img {
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 100px; 
+    height: auto; 
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <ul class="menu">
+            <li><a href="{% url 'iniciolog' %}">Inicio</a></li>
+            <li><a href="{% url 'historial' %}">Cuenta</a></li>
+        </ul>
+        </nav>
+    </header>
+    <div class="contenedor">
+        <h1>Boleta de Pago</h1>
+        <div class="boleta-info">
+            <p>Fecha: 01 de Julio 2024</p>
+            <p>Cliente:Nicolas</p>
+            <p>Monto: $60.000</p>
+            <p>Descripción: Camiseta Visita 2024</p>
+            <p style="color: red;">Pedido Pendiente de Envío</p>
+        </div>
+        <img src="{% static 'imagenesTienda/verificado.png' %}" alt="" class="verificado-img">
+        <div class="mensaje">
+            <p>Pago Realizado</p>
+        </div>
+    </div>
+    <button onclick="window.print()">Imprimir Boleta</button>
+</body>
+</html>

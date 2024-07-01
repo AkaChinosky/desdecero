@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <title>Albo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        p { font-size: 1.25em; }
+        ul { list-style: none; }
+        li { font-size: 1.25em; }
+
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            background-color: chocolate;
+        }
+        button:hover {
+            background-color: blueviolet;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .color-acento {
+            color: orange;
+        }
+
+        header {
+            background-color: rgb(245, 245, 245);
+        }
+
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bolder;
+            color: orange;
+            font-size: 1.5em;
+        }
+
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: darkred;
+        }
+
+        header a:hover {
+            color: red;
+        }
+
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 90vh;
+            color: white;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'imagenesTienda/banner.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        #hero h1 {
+            color: white;
+        }
+
+        #hero button {
+            font-size: 1.5em;
+        }
+
+        #somos-albos .container {
+            text-align: center;
+            padding: 200px 12px;
+        }
+
+        #nuestrascamisetas {
+            background-color: rgb(30, 30, 30);
+            color: white;
+            text-align: center;
+        }
+
+        #nuestrascamisetas .container {
+            padding: 100px 0px;
+        }
+
+        #nuestrascamisetas h2 {
+            margin-top: 0px;
+            font-size: 3em;
+        }
+
+        #nuestrascamisetas p {
+            display: none;
+        }
+
+        .carta {
+            background-position: center center;
+            background-size: cover;
+            padding: 50px;
+            margin: 20px;
+            border-radius: 15px;
+        }
+
+        .carta:first-child {
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'img_index/boladios.jpg' %}");
+        }
+
+        .carta:nth-child(2) {
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'img_index/nikechu.jpg' %}");
+        }
+
+        #caracteristicas {
+            background-image: url("{% static 'img_index/libertadores.jpg' %}");
+            background-repeat: no-repeat;
+            margin: 20px;
+            background-size: 500px 400px;
+            background-position: calc(100vw - 700px) 120px;
+        }
+
+        #caracteristicas .container {
+            text-align: initial;
+        }
+
+        #caracteristicas ul {
+            margin-left: 100px;
+        }
+
+        @media (min-width: 720px) {
+            header {
+                position: fixed;
+                width: 100%;
+            }
+
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 30px;
+            }
+        }
+
+        #somos-albos .container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #somos-albos .img-container {                   
+            background-image: linear-gradient(0deg, rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url("{% static 'img_index/boladiosypavez.jpg' %}");
+            background-size: cover;
+            background-position: center center;
+            margin: 10px;
+            height: 400px;
+            width: 300px;
+        }
+
+        #somos-albos .texto {
+            width: 50%;
+            max-width: 600px;
+            text-align: initial;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #somos-albos h2 {
+            margin-top: 0px;
+        }
+
+        #nuestrascamisetas .programas {
+            display: flex;
+            justify-content: center;
+        }
+
+        #nuestrascamisetas p {
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        #nuestrascamisetas h2 {
+            font-size: 4em;
+        }
+
+        #nuestrascamisetas h3 {
+            margin-top: 0;
+        }
+
+        #nuestrascamisetas .carta {
+            padding: 50px;
+        }
+
+        #final {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: rgb(30, 30, 30);
+            color: white;
+            height: 80vh;
+        }
+
+        #final h2 {
+            font-size: 9vw;
+        }
+
+        #final button {
+            font-size: 5vw;
+        }
+
+        footer {
+            background-color: rgb(230, 230, 230);
+        }
+
+        footer p {
+            margin: 0;
+            color: rgb(100, 100, 100);
+        }
+
+        footer .container {
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        @media (min-width: 1200px) {
+            #caracteristicas {
+                background-position-x: calc(100vw - 880px);
+            }
+        }
+
+        #final h2 {
+            font-size: 5em;
+        }
+
+        #final button {
+            font-size: 2em;
+        }
+
+        footer .container {
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="logo">ZONA ALBA</p>
+            <nav>
+                <a href="{% url 'historial' %}">Yo</a>
+                <a href="{% url 'principal' %}">admin</a>
+                <a href="{% url 'quienes_somos' %}">Quienes Somos</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" style="background-image: url('{% static 'imagenesTienda/banner.jpg' %}')">
+        <h1>Albo Locura <br>Pasión Garra y Amor</h1>
+        <a href="{% url 'iniciolog' %}" class="btn">IR A TIENDA</a>
+    </section>
+
+    <section id="somos-albos">
+        <div class="container">
+            <div class="img-container"></div>
+            <div class="texto">
+                <h2>Somos <span class="color-acento"> La Garra Brava</span></h2>
+                <p>Es Colo-Colo como el gran araucano <br>
+                    Que va a la lucha tenaz sin descansar <br>
+                    Porque el recuerdo de David Arellano <br>
+                    Siempre lo guía por la senda triunfal <br>
+                    <br>
+                    Es Colo-Colo valiente, fuerte y grande <br>
+                    De sangre altiva y noble corazón <br>
+                    Su nombre vibra desde el mar a los Andes <br>
+                    Y hay en sus triunfos esfuerzo y emoción
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="nuestrascamisetas">
+        <div class="container">
+            <h2>Nuestra Tienda</h2>
+            <div class="programas">
+                <div class="carta">
+                    <h3>Camisetas</h3>
+                    <p>Calidad</p>
+                    <form action="{% url 'iniciolog' %}">
+                        <button>+ INFO</button>
+                    </form>
+                </div>
+                <!-- <div class="carta">
+                    <h3>Chuteadores</h3>
+                    <p>Velocidad, Comodidad</p>
+                    <form action="https://www.nike.cl/chutiadores?_q=chutiadores&map=ft">
+                        <button>+ INFO</button>
+                    </form>
+                </div>-->
+                <!-- Habilitar cuando haga retros
+                <div class="carta">
+                    <h3>Retro</h3>
+                    <form action="https://www.templodelfutbol.cl/collections/universidad-catolica-vs-colo-colo">
+                        <p>Recuerdos e Historia</p>
+                        <button>+ INFO</button>
+                    </form>
+                </div>-->
+            </div>
+        </div>
+    </section>
+
+    <section id="caracteristicas">
+        <div class="container">
+            <ul>
+                <li>👕 Flexibles</li>
+                <li>💯 Comodas</li>
+                <li>👌 Calidad TOP</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="final">
+        <h2>Listo para Comprar</h2>
+        <form action="#nuestrascamisetas">
+            <button>COMPRA YA</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,6 +1,6 @@
 from django import forms
-from .models import Producto, Cliente, Compra, Region, Comuna
-
+from .models import Producto, Cliente, Compra, Region, Comuna, CustomUser
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
 
 class ClienteForm(forms.ModelForm):
     region = forms.ModelChoiceField(queryset=Region.objects.all(), required=True)
@@ -50,3 +50,17 @@ class ProductoForm(forms.ModelForm):
 
 
 
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = ('email',)  # Solo incluye el campo email
+
+class CustomUserChangeForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email',)  # Solo incluye el campo email
+
+class CustomAuthenticationForm(AuthenticationForm):
+    class Meta:
+        model = CustomUser
+        fields = ('email', 'password')

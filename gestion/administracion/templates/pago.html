@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Pago</title>
+<script>
+    function validarCVV(input) {
+        input.value = input.value.replace(/\D/g, '');
+        if (input.value.length > 3) {
+            input.value = input.value.slice(0, 3);
+        }
+    }
+</script>
+<script>
+    function formatFechaVencimiento(input) {
+        input.value = input.value.replace(/\D/g, '');
+        if (input.value.length >= 2 && input.value.indexOf('/') === -1) {
+            input.value = input.value.slice(0, 2) + '/' + input.value.slice(2);
+        }
+    }
+</script>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background-color: orange;
+    padding: 10px 0;
+}
+.menu {
+    text-align: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+}
+
+.menu li:hover > a {
+    background-color: rgb(220, 169, 111);
+}
+
+.contenedor {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.datos-tarjeta {
+    margin-top: 20px;
+}
+
+.datos-tarjeta div {
+    margin-bottom: 10px;
+}
+
+.datos-tarjeta label {
+    font-weight: bold;
+}
+
+.datos-tarjeta input {
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+</style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'iniciolog' %}">Tienda</a></li>
+                <a href="{% url 'principal' %}">admin</a>
+            </ul>
+        </nav>
+    </header>
+<div class="contenedor">
+    <h2 style="text-align: center;">METODO DE PAGO</h2>
+    <form action="{% url 'boleta' %}" method="post" class="datos-tarjeta">
+        {% csrf_token %}
+
+        <div>
+            <label for="nombre_tarjeta">Nombre en la Tarjeta:</label>
+            <input type="text" id="nombre_tarjeta" name="nombre_tarjeta" required>
+        </div>
+        <div>
+            <label for="numero_tarjeta">Número de Tarjeta:</label>
+            <input type="text" id="numero_tarjeta" name="numero_tarjeta" pattern="[0-9]{16}" maxlength="16" title="Por favor ingrese 16 números" required>
+        </div>
+        <div>
+            <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
+            <input type="text" id="fecha_vencimiento" name="fecha_vencimiento" maxlength="5" placeholder="MM/YY" oninput="formatFechaVencimiento(this)" required>
+        </div>
+        <div>
+            <label for="cvv">Código de Seguridad (CVV/CVC):</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" oninput="validarCVV(this)" required>
+        </div>
+        <div class="tptarj">
+            <label for="tipo_tarjeta">Tipo de Tarjeta:</label>
+            <select id="tipo_tarjeta" name="tipo_tarjeta" required>
+                <option value="Visa">Visa</option>
+                <option value="Mastercard">Mastercard</option>
+                <option value="American Express">American Express</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div>
+            <label for="direccion_facturacion">Dirección de Facturación:</label>
+            <input type="text" id="direccion_facturacion" name="direccion_facturacion" required>
+        </div>
+        <div>
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" name="ciudad" required>
+        </div>
+        <div>
+            <label for="codigo_postal">Código Postal:</label>
+            <input type="text" id="codigo_postal" name="codigo_postal" required>
+        </div>
+        <div>
+            <label for="pais">País:</label>
+            <input type="text" id="pais" name="pais" required>
+        </div>
+        <div>
+            <label for="correo">Correo Electrónico (para el recibo):</label>
+            <input type="email" id="correo" name="correo" required>
+        </div>
+        <div>
+            <input type="submit" value="Enviar">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

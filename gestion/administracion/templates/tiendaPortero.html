@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portero 2024</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+    
+    *{
+        margin: 0;
+        padding:0 ;
+        box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
+    }
+    
+    body{
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    img{
+        max-width: 100%;
+    }
+    
+    .zoom-img {
+        width: 100%; 
+        transition: transform 0.3s ease; 
+        cursor: crosshair;
+    }
+    
+    .zoom-img:hover {
+        transform: scale(1.2); 
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .header {
+        display: flex;
+        align-items: center;
+        min-height: 80vh;
+        background-color: #f5f5f5;
+        padding: 70px 0;
+    }
+    
+    .menu{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .logo{
+        font-size: 25px;
+        color: orange;
+        text-transform: uppercase;
+        font-weight: 800;
+    }
+    
+    .menu .navbar ul li{
+        position: relative;
+        float: left;
+    }
+    
+    .menu .navbar ul li a {
+        font-size: 18px;
+        padding: 20px;
+        color: orange;
+        display: block;
+    }
+    
+    #menu{
+        display: none;
+    }
+    
+    .menu-icono{
+        width: 25px;
+    }
+    
+    .menu label{
+        cursor: pointer;
+        display: none;
+    }
+    
+    .submenu{
+        position: relative;
+    }
+    
+    .submenu #carrito{
+        display: none;
+    }
+    
+    .submenu:hover #carrito{
+        display: block;
+        position: absolute;
+        right: 0;
+        backdrop-filter: blur(10px);
+        top:100%;
+        z-index: 1;
+        background-color: #4e4b5076;
+        padding: 20px;
+        min-width: 400px;
+    }
+    
+    table{
+        width: 100%;
+    }
+    
+    th,td{
+        color:#ffffff;
+    }
+    
+    .borrar{
+        background-color: #111111;
+        border-radius: 50%;
+        padding: 5px 10px;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 800;
+        cursor: pointer;
+    }
+    
+    .header-content{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: 1;
+        padding: 0 200px;
+    }
+    
+    .header-img{
+        flex-basis: 60%;
+        text-align: center;
+    }
+    
+    .header-txt{
+        flex-basis: 50%;
+        text-align: center;
+    }
+    
+    .header-txt h1{
+        font-size:90px;
+        text-transform: uppercase;
+        line-height: 1;
+        color:#111111;
+        font-family: 'Oswald', sans-serif;
+        margin-bottom: 15px;
+    }
+    
+    .header-txt p{
+        font-size: 20px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    
+    .btn-1{
+        display: inline-block;
+        padding: 11px 25px;
+        background-color: #111111;
+        color: #ffffff;
+        border-radius: 5px;
+    }
+    
+    .ofert {
+        padding: 20px 0 0 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .ofert-1{
+        display: flex;
+        align-items: center;
+        flex-basis: calc(33.3% - 15px);
+        background-color: #f5f5f5;
+        padding: 10px;
+    }
+    
+    .ofert-img{
+        flex-basis: 50%;
+        margin-right: 15px;
+    }
+    
+    .ofert-img img{
+        width: 250px;
+    }
+    
+    .ofert-txt{
+        flex-basis: 50%;
+        text-align: center;
+    }
+    
+    .ofert-txt h3{
+        color: #111111;
+        font-family: 'Oswald',sans-serif;
+        font-size: 25px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    
+    .btn-2{
+        display: inline-block;
+        padding: 7px 10px;
+        background-color: #111111;
+        color: #ffffff;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+    
+    .product{
+        padding: 50px 0;
+        text-align: center;
+    }
+    
+    .product h2{
+        color: #111111;
+        font-family: 'Oswald', sans-serif;
+        font-size: 50px;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+    }
+    
+    .product-content{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 50px;
+    }
+    
+    .product{
+        text-align: center;
+        padding: 30px;
+        box-shadow: 0 0 20px rgba(0,0,0.1);
+    }
+    
+    .product-img{
+        width: 250px;
+        height: 370px;
+        margin-bottom: 20px;
+    }
+    
+    .product h3{
+        font-size: 20px;
+        color: #111111;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        margin-bottom:15px ;
+    }
+    
+    .product p, .precio{
+        font-size: 16px;
+        color: #111111;
+        margin-bottom: 15px;
+    }
+    
+    .precio{
+        font-weight: 800;
+    }
+    
+    .icons{
+        padding: 50px 0 100px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .icon-1{
+        flex-basis: calc(33.3% - 30px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px;
+        background-color: #f5f5f5;
+    }
+    
+    .icon-txt h3{
+        font-size: 20px;
+        color: #111111;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+    }
+    
+    .icon-txt p{
+        font-size: 16px;
+        color: #111111;
+    }
+    
+    .blog{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 100px;
+    }
+    
+    .blog-1{
+        flex-basis: calc(33.3% - 30px);
+        text-align: center;
+    }
+    
+    .blog-1 img{
+        margin-bottom: 20px;
+    }
+    
+    .blog-1 h3{
+        font-size: 20px;
+        color: #111111;
+        font-family: 'Oswald',sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+    
+    .blog-1 p{
+        font-size: 16px;
+        color: #111111;
+    }
+    
+    .footer{
+        padding: 50px 0;
+        background-color: #111111;
+    }
+    
+    .footer-content{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .form-group label {
+        color: #222;
+        font-weight: 700;
+    }
+    
+    .form-group select {
+        padding: 0.5em;
+        background-color: #f7f7f9;
+        border: none;
+        outline: none;
+        color: #666;
+    }
+    
+    .input-quantity {
+        background-color: #f7f7f9;
+        border: none;
+        padding: 10px;
+        width: 60px;
+        height: 100%;
+        color: #666;
+        font-weight: 500;
+    }
+    
+    .input-quantity:focus {
+        outline: none;
+    }
+    
+    .link h3{
+        font-size: 18px;
+        color: #ffffff;
+        font-family: 'Oswald',sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    
+    .link a{
+        font-size: 10px;
+        color: #dcdcdc;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    @media (max-width:991px){
+        .menu{
+            padding: 20px;
+        }
+        .menu label{
+            display: initial;
+        }
+        .menu .navbar{
+            position: absolute;
+            top:100%;
+            left: 0;
+            right: 0;
+            background-color: #181818;
+            display: none;
+        }
+    
+        .menu .navbar ul li{
+            width:100%
+        }
+    
+        .menu .navbar li a{
+            color: #ffffff;
+        }
+    
+        #menu:checked ~ .navbar{
+            display: initial;
+        }
+    
+    .logo{
+        display: none;
+    }
+    
+    .submenu:hover #carrito{
+        min-width: 100%;
+    }
+    
+    .header{
+        min-height: 0vh;
+    }
+    .header-content{
+        padding: 50px 0;
+        flex-direction: column;
+    }
+    
+    .header-img{
+        display: none;
+    }
+    
+    .header-txt{
+        flex-basis: 100%;
+        text-align: center;
+    }
+    
+    .header-txt h1{
+        font-size: 70px;
+    }
+    
+    .ofert{
+        padding: 30px 30px 0 30px;
+        flex-direction: column;
+    }
+    
+    .ofert-1{
+        margin-bottom: 30px;
+    }
+    
+    .product{
+        padding: 0 30px 30px 30px;
+    }
+    
+    .product h2{
+        margin-bottom: 30px;
+    }
+    
+    .product-content{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+    }
+    
+    .product-img{
+        width: 200px;
+        height: 280px;
+    }
+    
+    .icons{
+        padding: 30px;
+        flex-direction:column
+    }
+    
+    .icon-1{
+        margin-bottom: 30px;
+    }
+    
+    .blog{
+        padding: 0 30px 30px 30px;
+        flex-direction: column;
+    }
+    
+    .blog-1{
+        margin-bottom: 30px;
+    }
+    
+    .footer{
+        padding: 30px;
+    }
+    
+    .footer-content{
+        flex-direction: column;
+        text-align: center;
+    }
+    }
+    
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="menu container">
+        <a href="{% url 'index' %}" class="logo">ByN</a>
+        <input type="checkbox" id="menu" />
+        <label for="menu">
+            <img src="{% static 'sinFondo/menu.png' %}" class="menu-icono" alt="Menú">
+        </label>
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'index' %}" style="font-weight: bolder;">INICIO</a></li>
+                <li><a href="{% url 'iniciolog' %}" style="font-weight: bolder;">PRODUCTOS</a></li>
+                <li><a href="{% url 'historial' %}" style="font-weight: bolder;">YO</a></li>
+            </ul>
+        </nav>
+        <div>
+            <ul>
+                <li class="submenu">
+                    <img src="{% static 'SinFondo/car.svg' %}" id="img-carrito" alt="Carrito">
+                    <div id="carrito">
+                        <table id="lista-carrito">
+                            <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <a href="{% url 'tiendaVisita' %}" id="vaciar-carrito" class="btn-2">Vaciar Carrito</a>
+                        <a href="{% url 'envio' %}" class="btn-2">Ver Envío</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="header-content container">
+        <div class="header-img">
+            <img src="{% static 'imagTienda/arqueroTienda.png' %}" alt="Camiseta arquero 2024" class="zoom-img">
+        </div>
+        <div class="header-txt">
+            <h1>Camiseta Portero 2024</h1>
+            <p style="color: orangered"style="font-weight: bolder">$50.000</p>
+
+            <div class="container-details-product">
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="Talla">Talla Camiseta</label>
+                        <select name="Talla" id="Talla">
+                            <option disabled selected values="">
+                                Escoge una Talla
+                            </option>
+                            <option value="Talla1">S</option>
+                            <option value="Talla2">M</option>
+                            <option value="Talla3">L</option>
+                            <option value="Talla3">XL</option>
+
+                        </select>
+
+                        <div class="container-quantity">
+                            
+                            <input 
+                            type="number" 
+                            placeholder="1" 
+                            value="1" 
+                            min="1" 
+                            max="99" 
+                            class="input-quantity"/>
+            
+                            <div class="btn-increment-decrement">
+                                <i class="fa-solid fa-angle-up" id="increment"></i>
+                                  <i class="fa-solid fa-angle-down" id="decrement"></i>
+                                  <label for="cantidad" style="color: gray;">Cantidad</label>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <a href="#" class="agregar-carrito btn-2" data-id="3" data-name="Camiseta Local 2024" data-price="60000">Agregar al Carrito</a>
+
+        </div>
+    </div>
+
+
+</header>
+<div class="container-description">
+    <div class="title-description">
+        <h4 style="text-align: center;">Descripcion</h4>
+        <i class="fa-solid fa-angle-down"></i>
+    </div>
+    <div class="text-description">
+        <p style="margin: 0px 300px 25px">En un vibrante amarillo, la camiseta de portero celebra la historia del equipo. Inspirada en un legendario guardameta, garantiza comodidad con tecnología AEROREADY y destaca por su sostenibilidad gracias a Primegreen. ¡Prepárate para brillar en cada atajada con estilo y rendimiento!</p>
+    </div>
+<section class="ofert container">
+<h1 style="margin-bottom: 10px">PRODUCTOS RELACIONADOS:</h1>
+</section>
+
+<section id="camisetass">
+<main class="produts container" id="lista-1">
+
+    <div class="product-content">
+
+        <div class="product">
+            <img src="{% static 'sinFondo/PechoAntesGr.png' %}" alt="Camiseta antes 2023">
+            <div class="product-txt">
+                <h3 >Camiseta Local 2023</h3>
+                <p  >Calidad Premium</p>
+                <p class="precio">$45.000</p>
+                <a href="{% url 'tiendaBlancAntes' %}" class="agregar-carrito btn-2" data-id="1">Ver Producto</a>
+            </div>
+        </div>
+
+            <div class="product">
+                <img src="{% static 'sinFondo/pechoRojaGr.png' %}" alt="Camiseta roja 2023">
+                <div class="product-txt">
+                    <h3>Camiseta Visita 2023</h3>
+                    <p>Calidad Premium</p>
+                    <p class="precio" style="color: brown;">$45.000</p>
+                    <a href="{% url 'tiendaRoja' %}" class="agregar-carrito btn-2" data-id="2">Ver Producto</a>
+                </div>
+            </div>
+        
+                <div class="product">
+                    <img src="{% static 'sinFondo/PechoCalentGr.png' %}" alt="Camiseta de entreno ">
+                    <div class="product-txt">
+                        <h3>Camiseta Entreno 2024</h3>
+                        <p >Calidad Premium</p>
+                        <p class="precio">$60.000</p>
+                        <a href="{% url 'tiendaCalent' %}" class="agregar-carrito btn-2" data-id="2">Ver Producto</a>
+                    </div>
+                </div>
+                    </section>
+</main>
+<section class="icons container">
+
+    <div class="icon-1">
+        <div class="icon-img">
+            <img src="{% static 'SinFondo/i1.svg' %}" alt="Pago Seguro">
+        </div>
+        <div class="icon-text">
+            <h3>Estilosas</h3>
+            <p>Para cualquier ocasion</p>
+        </div>
+    </div>
+
+    <div class="icon-1">
+        <div class="icon-img">
+            <img src="{% static 'SinFondo/i2.svg' %}" alt="Soporte 24/7">
+        </div>
+        <div class="icon-text">
+            <h3>Planchables</h3>
+            <p>Cuando lo necesites</p>
+        </div>
+    </div>
+
+    <div class="icon-1">
+        <div class="icon-img">
+            <img src="{% static 'SinFondo/i3.svg' %}" alt="Envío Rápido">
+        </div>
+        <div class="icon-text">
+            <h3>Comodas</h3>
+            <p>En todo momento</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="blog container">
+    <div class="blog-1">
+        <img src="" alt="">
+        <h3></h3>
+        <p></p>
+    </div>
+
+
+    <div class="blog-2">
+        <img src="{% static 'imagenesTienda/banner.jpg' %}" alt="blog1">
+        <h3></h3>
+        <p></p>
+    </div>
+
+
+    <div class="blog-1">
+        <img src="" alt="">
+        <h3></h3>
+        <p></p>
+    </div>
+
+</section>
+
+<footer class="footer">
+    <div class="footer-content container">
+
+        <div class="link">
+            <h3>REDES</h3>
+            <ul>
+                <li><a href="a" style="font-weight: bolder;">lorem</a></li>
+            </ul>
+        </div>
+
+        <div class="link">
+            <h3>CONTACTO</h3>
+            <ul>
+                <li><a href="https://mail.google.com/" style="font-weight: bolder;">BLANCOYNEGROSPORTS7@GMAIL.COM</a></li>
+            </ul>
+        </div>
+
+        <div class="link">
+            <h3>Terminos y Condiciones</h3>
+            <ul>
+                <li><a href="a" style="font-weight: bolder;">lorem</a></li>
+            </ul>
+        </div>
+
+        <div class="link">
+            <h3>Privacidad</h3>
+            <ul>
+                <li><a href="a" style="font-weight: bolder;">lorem</a></li>
+
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="{% static 'jss/scrip.js' %}"></script>
+</body>
+</html>
