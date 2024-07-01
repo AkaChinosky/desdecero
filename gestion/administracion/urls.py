@@ -4,6 +4,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from .views import register_view, login_view
+from django.views.generic.base import RedirectView
+
 
 urlpatterns = [
     
@@ -54,6 +56,8 @@ urlpatterns = [
     path('custom_login/', views.custom_admin, name='custom_login'),
     path('custom_admin/', views.admin_view, name='custom_admin'),
     path('register/', register_view, name='indexlog'),
+    path('accounts/profile/', RedirectView.as_view(pattern_name='iniciolog', permanent=False)),
+    
 ]
 
 if settings.DEBUG:
