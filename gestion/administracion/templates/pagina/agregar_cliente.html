@@ -1,0 +1,56 @@
+{% extends "pagina/base.html" %}
+
+{% block title %}Agregar Cliente{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Agregar Cliente</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'listar_clientes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#id_region").change(function() {
+            var url = "{% url 'ajax_load_comunas' %}";
+            var regionId = $(this).val();
+            $.ajax({
+                url: url,
+                data: {
+                    'region': regionId
+                },
+                success: function(data) {
+                    $("#id_comuna").html('');
+                    data.forEach(function(comuna) {
+                        $("#id_comuna").append(new Option(comuna.nombre, comuna.id));
+                    });
+                }
+            });
+        });
+    });
+
+    document.getElementById('clienteForm').addEventListener('submit', function(event) {
+        var form = event.target;
+        var telefono = form.telefono.value;
+        var rut = form.rut.value;
+    
+        // Perdon si lo deje aqui el scritp pero me exploto la cabeza intentar enlazar todo
+        var telefonoRegex = /^\+56\d{9}$/;
+        if (!telefonoRegex.test(telefono)) {
+            alert('El número de teléfono debe ingresarse en el formato: "+56912345678". 9 dígitos después del código de país "+56".');
+            event.preventDefault();
+        }
+    
+        var rutRegex = /^\d{1,2}\.\d{3}\.\d{3}-[0-9Kk]$/;
+        if (!rutRegex.test(rut)) {
+            alert('El RUT debe ingresarse en el formato: "XX.XXX.XXX-X".');
+            event.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

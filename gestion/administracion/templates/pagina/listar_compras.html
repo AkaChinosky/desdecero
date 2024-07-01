@@ -1,0 +1,47 @@
+{% extends 'pagina/base.html' %}
+
+{% block title %}Listar Compras{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Compras</h2>
+    <a href="{% url 'agregar_compra' %}" class="btn btn-primary mb-2">Agregar Compra</a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Imagen</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in compras %}
+                <tr>
+                    <td>{{ compra.id }}</td>
+                    <td>{{ compra.producto.nombre }}</td>
+                    <td>
+                        {% if compra.producto.imagen %}
+                            <img src="{{ compra.producto.imagen.url }}" alt="{{ compra.producto.nombre }}" style="width: 50px; height: auto;">
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                    <td>{{ compra.cliente.nombre }} {{ compra.cliente.apellido }}</td>
+                    <td>{{ compra.fecha }}</td>
+                    <td>{{ compra.cantidad }}</td>
+                    <td>
+                        <a href="{% url 'editar_compra' compra.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_compra' compra.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
